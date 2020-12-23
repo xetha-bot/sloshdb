@@ -1,0 +1,19 @@
+{
+    "private": true,
+    "version": "0.0.1",
+    "main": "dist/src/index.js",
+    "scripts": {
+        "start": "node . --trace-warnings",
+        "db:init": "node dist/src/database/database.js --init",
+        "db:migrate": "node dist/src/database/migrate.js",
+        "pm2:init": "pm2 start dist/src/index.js --name \"slosh-db\" && pm2 save",
+        "pm2:start": "pm2 start slosh-db",
+        "pm2:stop": "pm2 stop slosh-db",
+        "user:create": "node dist/src/cli/userCreate.js",
+        "user:delete": "node dist/src/cli/userDelete.js",
+        "user:edit": "node dist/src/cli/userEdit.js",
+        "build": "rimraf dist && tsc --build"
+    },
+    "dependencies": {},
+    "devDependencies": {}
+}
