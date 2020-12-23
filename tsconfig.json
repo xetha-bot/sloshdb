@@ -16,7 +16,7 @@
 		"removeComments": false,
 		"alwaysStrict": true,
 		"allowSyntheticDefaultImports": true,
-		"pretty": false,
+		"pretty": true,
 		"noEmitOnError": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
