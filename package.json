@@ -1,19 +1,40 @@
 {
     "private": true,
     "version": "0.0.1",
-    "main": "dist/src/index.js",
+    "main": "dist/index.js",
     "scripts": {
         "start": "node . --trace-warnings",
-        "db:init": "node dist/src/database/database.js --init",
-        "db:migrate": "node dist/src/database/migrate.js",
-        "pm2:init": "pm2 start dist/src/index.js --name \"slosh-db\" && pm2 save",
+        "key:gen": "node dist/scripts/key-gen.js",
+        "database": "node dist/database/database.js --init",
+        "migrate": "node dist/database/migrate.js --migrate",
+        "prepm2:init": "pm2 start dist/index.js --name \"slosh-db\"",
+        "pm2:init": "pm2 stop slosh-db",
+        "postpm2:init": "pm2 save",
         "pm2:start": "pm2 start slosh-db",
         "pm2:stop": "pm2 stop slosh-db",
-        "user:create": "node dist/src/cli/userCreate.js",
-        "user:delete": "node dist/src/cli/userDelete.js",
-        "user:edit": "node dist/src/cli/userEdit.js",
-        "build": "rimraf dist && tsc --build"
+        "user:create": "node dist/cli/userCreate.js",
+        "user:delete": "node dist/cli/userDelete.js",
+        "user:edit": "node dist/cli/userEdit.js",
+        "prebuild": "rimraf dist",
+        "build": "tsc --build"
     },
-    "dependencies": {},
-    "devDependencies": {}
+    "dependencies": {
+        "@discordjs/collection": "^0.1.6",
+        "crypto-js": "^4.0.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "inquirer": "^7.3.3",
+        "sequelize": "^6.3.5",
+        "socket.io": "^3.0.4",
+        "winston": "^3.3.3",
+        "winston-daily-rotate-file": "^4.5.0"
+    },
+    "devDependencies": {
+        "@types/crypto-js": "^4.0.1",
+        "@types/express": "^4.17.9",
+        "@types/node": "^14.14.16",
+        "@types/sequelize": "^4.28.9",
+        "@types/socket.io": "^2.1.12",
+        "@types/validator": "^13.1.1"
+    }
 }

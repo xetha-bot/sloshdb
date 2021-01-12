@@ -8,19 +8,18 @@
 			"esnext",
 		],
 		"sourceMap": false,
-		"inlineSourceMap": true,
-		"inlineSources": true,
-		"sourceRoot": "/",
+		"inlineSourceMap": false,
+		"inlineSources": false,
 		"outDir": "dist",
 		"declaration": false,
 		"removeComments": false,
 		"alwaysStrict": true,
-		"allowSyntheticDefaultImports": true,
 		"pretty": true,
 		"noEmitOnError": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
-		"noUnusedParameters": true
+		"noUnusedParameters": true,
+		"esModuleInterop": true
 	},
 	"include": [
 		"src"

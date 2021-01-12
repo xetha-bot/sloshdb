@@ -2,3 +2,5 @@
 *.db
 /logs/*
 /dist/
+.env
+/tmp/
