@@ -1,6 +1,2 @@
 /node_modules/
-*.db
-/logs/*
 /dist/
-.env
-/tmp/

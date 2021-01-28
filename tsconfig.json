@@ -1,31 +1,19 @@
 {
-	"compilerOptions": {
-		"strict": true,
-		"moduleResolution": "node",
-		"module": "commonjs",
-		"target": "es2019",
-		"lib": [
-			"esnext",
-		],
-		"sourceMap": false,
-		"inlineSourceMap": false,
-		"inlineSources": false,
-		"outDir": "dist",
-		"declaration": false,
-		"removeComments": false,
-		"alwaysStrict": true,
-		"pretty": true,
-		"noEmitOnError": true,
-		"noImplicitReturns": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"esModuleInterop": true
-	},
-	"include": [
-		"src"
-	],
-	"exclude": [
-		"node_modules",
-		"dist"
-	],
+    "compilerOptions": {
+        "moduleResolution": "Node",
+        "module": "commonjs",
+        "target": "esnext",
+        "noImplicitAny": true,
+        "sourceMap": false,
+        "pretty": true,
+        "outDir": "./dist",
+        "declaration": false,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+    },
+    "include": [
+        "src"
+    ]
 }

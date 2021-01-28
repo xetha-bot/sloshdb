@@ -1,40 +1,30 @@
 {
     "private": true,
-    "version": "0.0.1",
-    "main": "dist/index.js",
+    "version": "1.0.0-0",
+    "main": "dist/src/index.js",
     "scripts": {
         "start": "node . --trace-warnings",
-        "key:gen": "node dist/scripts/key-gen.js",
-        "database": "node dist/database/database.js --init",
-        "migrate": "node dist/database/migrate.js --migrate",
-        "prepm2:init": "pm2 start dist/index.js --name \"slosh-db\"",
-        "pm2:init": "pm2 stop slosh-db",
-        "postpm2:init": "pm2 save",
-        "pm2:start": "pm2 start slosh-db",
-        "pm2:stop": "pm2 stop slosh-db",
-        "user:create": "node dist/cli/userCreate.js",
-        "user:delete": "node dist/cli/userDelete.js",
-        "user:edit": "node dist/cli/userEdit.js",
         "prebuild": "rimraf dist",
-        "build": "tsc --build"
+        "build": "tsc --build",
+        "test": "node tests/",
+        "p:start": "pm2 start ecosystem.config.js",
+        "p:stop": "pm2 stop ecosystem.config.js",
+        "p:restart": "pm2 restart ecosystem.config.js",
+        "p:delete": "pm2 delete ecosystem.config.js",
+        "v:patch": "npm version patch -m \"chore(version): %s\"",
+        "v:minor": "npm version minor -m \"chore(version): %s\"",
+        "v:major": "npm version major -m \"chore(version): %s\"",
+        "pre:patch": "npm version prepatch -m \"chore(version): %s\"",
+        "pre:minor": "npm version preminor -m \"chore(version): %s\"",
+        "pre:major": "npm version premajor -m \"chore(version): %s\""
     },
     "dependencies": {
-        "@discordjs/collection": "^0.1.6",
-        "crypto-js": "^4.0.0",
-        "dotenv": "^8.2.0",
-        "express": "^4.17.1",
-        "inquirer": "^7.3.3",
-        "sequelize": "^6.3.5",
-        "socket.io": "^3.0.5",
-        "winston": "^3.3.3",
-        "winston-daily-rotate-file": "^4.5.0"
+        "socket.io": "^3.0.5"
     },
     "devDependencies": {
-        "@types/crypto-js": "^4.0.1",
-        "@types/express": "^4.17.11",
         "@types/node": "^14.14.20",
-        "@types/sequelize": "^4.28.9",
         "@types/socket.io": "^2.1.12",
-        "@types/validator": "^13.1.3"
+        "rimraf": "^3.0.2",
+        "typescript": "^4.1.3"
     }
 }
