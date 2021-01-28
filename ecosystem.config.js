@@ -1,7 +1,7 @@
 module.exports = {
     apps: [{
         name: "sloshdb",
-        script: "./dist/src/",
+        script: "./dist/",
         env: {
             NODE_ENV: "production"
         },
