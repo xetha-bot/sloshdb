@@ -19,7 +19,7 @@
         "pre:major": "npm version premajor -m \"chore(version): %s\""
     },
     "dependencies": {
-        "socket.io": "^3.1.0"
+        "socket.io": "^3.1.1"
     },
     "devDependencies": {
         "@types/node": "^14.14.22",
