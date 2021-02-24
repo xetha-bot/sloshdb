@@ -59,10 +59,6 @@ const store = db.createStore('test'); // create a store
 - All of the data is in-memory cached so if the server restarts the all of the data is gone
 
 # Todo
-- Secure Authentication
-- Secure namespaces
-- Option to change the database PORT
-- Option to reconnect, autoconnect etc
 - store data in a database so it can be either in-memory or in-disk
 
 # Contributions 
