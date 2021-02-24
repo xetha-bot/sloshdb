@@ -73,7 +73,7 @@ serverSocket.use(async (socket, next) => {
 
     if (!password) {
 
-        return next(new Error('Auth Error: No username Header or it\'s invalid'));
+        return next(new Error('Auth Error: No password Header or it\'s invalid'));
 
     }
 
@@ -102,7 +102,7 @@ serverSocket.on('connection', (socket: Socket) => {
     const database = socket.nsp;
 
     socket.on('message', async (message) => {
-        Logger.info(`[${socket.id}|${socket.handshake.address}] ${message}`);
+        Logger.info(`[${socket.id}|${socket.handshake.address}|${socket.nsp.name}] ${message}`);
     });
 
     function use(method: string, fn: Middleware) {
@@ -113,6 +113,8 @@ serverSocket.on('connection', (socket: Socket) => {
                 return socket.emit('error', new Error(`Invalid Payload`));
 
             }
+
+            Logger.info(`[${socket.id}|${socket.handshake.address}|${socket.nsp.name}] ${method.toUpperCase()} ${req.collection} ${req.key || ''}`);
 
             try {
 
