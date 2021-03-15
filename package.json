@@ -22,7 +22,7 @@
         "crypto-js": "^4.0.0",
         "dotenv": "^8.2.0",
         "inquirer": "^8.0.0",
-        "sequelize": "^6.5.0",
+        "sequelize": "^6.5.1",
         "socket.io": "^4.0.0",
         "sqlite3": "^5.0.2",
         "validator": "^13.5.2"
