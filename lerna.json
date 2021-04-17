@@ -1,0 +1,7 @@
+{
+  "packages": [
+    "sloshdb.js",
+    "xandra"
+  ],
+  "version": "0.0.0"
+}
