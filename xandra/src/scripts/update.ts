@@ -1,4 +1,4 @@
-import Config from '../Config.json';
+import Config from '../config.json';
 import { promisify } from 'util';
 import { promises as fs } from 'fs';
 import path from 'path';
