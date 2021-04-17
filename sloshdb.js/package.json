@@ -1,0 +1,35 @@
+{
+  "name": "sloshdb.js",
+  "version": "0.1.0",
+  "description": "Client for SloshDB",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "postbuild": "npm run clean",
+    "build": "tsc --build",
+    "test": "echo \"sloshdb.js testing, todo...\""
+  },
+  "keywords": [
+    "client",
+    "socket.io",
+    "database",
+    "cache"
+  ],
+  "author": "oadpoaw <oadpoaw@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^14.14.22",
+    "socket.io-client": "^3.1.0"
+  },
+  "homepage": "https://github.com/oadpoaw/sloshdb/tree/development/sloshdb.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oadpoaw/sloshdb.git"
+  },
+  "devDependencies": {
+    "@types/socket.io-client": "^1.4.35",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.3"
+  }
+}
