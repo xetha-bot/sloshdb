@@ -1,20 +1,40 @@
 # sloshdb
-Real-time in-memory key-value database inspired by redis written in Typescript
+Real-time in-memory key-value database written in Typescript
 
-## How to install and run, stop etc
+## Structure
 
-### Requirements
-- Git
-- Node v14 or above
-- PM2, install by running `npm install --global pm2`
+| Codebase                 |  Description  |
+| :----------------------- | :-----------: |
+| [xandra](xandra)         |    server     |
+| [sloshdb.js](sloshdb.js) |    client     |
+| [docs](docs)             | documentation |
 
-### Install Dependencies
-```sh
-$ npm install
-```
+## Features
 
-# Contributions 
-Small or Big Contributions are welcomed!
+## Installation
 
-# License
+See [Installation](docs/Installation.md)
+
+## Updating
+
+See [Updating](docs/Updating.md)
+
+## CRUD Operations
+
+See [CRUD](docs/CRUD.md)
+
+## Contributions
+
+I recommend creating an issue or replying in a comment to let me know what you are working on first that way we don't overwrite each other.
+
+Please read [CONTRIBUTING.md](docs/CONTRIBUTING.md) for details on this project.
+
+## Code of Conduct
+
+Please read [CODE_OF_CONDUCT.md](docs/CODE_OF_CONDUCT.md) for details on our code of conduct.
+
+## [WIP] Work In Progress
+- [Transactions](https://en.wikipedia.org/wiki/Database_transaction) Support (To be [ACID](https://en.wikipedia.org/wiki/ACID) Compliant)
+
+## License
 See [LICENSE](LICENSE)
