@@ -1,0 +1,24 @@
+workflows:
+  - .github/workflows/**
+
+documentation:
+  - "*.md"
+  - docs/**
+
+dependabot.yml:
+  - dependabot.yml
+
+labeler.yml:
+  - labeler.yml
+
+sloshdb.js:
+  - sloshdb.js/**
+
+xandra:
+  - xandra/**
+
+tsconfig.json:
+  - tsconfig.json
+
+gitignore:
+  - .gitignore
