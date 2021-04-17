@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/oadpoaw/sloshdb/compare/v0.3.1...v0.3.2) (2021-04-17)
+
+
+### Bug Fixes
+
+* **update:** should be `.text()` instead of `.json()` ([2eae800](https://github.com/oadpoaw/sloshdb/commit/2eae800406e42ddc9579aa6c90bac9baec84fefe))
+
+
+
+
+
 ## [0.3.1](https://github.com/oadpoaw/sloshdb/compare/v0.3.0...v0.3.1) (2021-04-17)
 
 
