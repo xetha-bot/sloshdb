@@ -1,0 +1,36 @@
+name: deploy-xandra
+
+on:
+  push:
+    paths:
+      - xandra/**
+    tags:
+      - "v*.*.*"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: Production - xandra
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14.x
+
+      - working-directory: xandra
+        run: |
+          npm ci
+          npm run build
+          npm test
+          tar -cvzf xandra.tar.gz package.json package-lock.json dist data LICENSE
+          SUM=`sha256sum xandra.tar.gz`
+          echo $SUM > checksum.txt
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: |
+            xandra/xandra.tar.gz
+            xandra/checksum.txt

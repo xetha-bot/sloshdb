@@ -1,19 +1,23 @@
-name: Continuous Integration
+name: test-xandra
 
 on:
   push:
     branches: [development]
-  pull_request:
-    branches: [development]
+    paths:
+      - xandra/**
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    environment: Staging - xandra
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 14.x
 
-      - run: npm install
-      - run: npm run build
+      - working-directory: ./xandra
+        run: |
+          npm ci
+          npm run build
+          npm test
