@@ -2,8 +2,8 @@ workflows:
   - .github/workflows/**
 
 documentation:
-  - "*.md"
   - docs/**
+  - README.md
 
 dependabot.yml:
   - dependabot.yml
