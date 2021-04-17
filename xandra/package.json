@@ -1,18 +1,18 @@
 {
     "private": true,
     "version": "0.3.0",
-    "main": "dist/index.js",
+    "main": "dist/src/index.js",
     "scripts": {
         "start": "node . --trace-warnings",
         "clean": "rimraf dist",
         "prebuild": "npm run clean",
         "build": "tsc --build",
         "test": "echo \"xandra testing, todo...\"",
-        "update": "node dist/scripts/update.ts",
-        "u:create": "node dist/scripts/createUser.js",
-        "u:delete": "node dist/scripts/deleteUser.js",
-        "u:edit": "node dist/scripts/editUser.js",
-        "u:list": "node dist/scripts/listUsers.js"
+        "update": "node dist/src/scripts/update.js",
+        "u:create": "node dist/src/scripts/createUser.js",
+        "u:delete": "node dist/src/scripts/deleteUser.js",
+        "u:edit": "node dist/src/scripts/editUser.js",
+        "u:list": "node dist/src/scripts/listUsers.js"
     },
     "dependencies": {
         "@xetha/base64": "^1.0.8",
