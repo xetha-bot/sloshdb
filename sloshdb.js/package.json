@@ -1,6 +1,6 @@
 {
   "name": "sloshdb.js",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Client for SloshDB",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

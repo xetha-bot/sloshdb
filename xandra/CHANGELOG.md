@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/oadpoaw/sloshdb/compare/v0.2.1...v0.3.0) (2021-04-17)
+
+
+### Features
+
+* MIT License ([882143d](https://github.com/oadpoaw/sloshdb/commit/882143d51fa733193be70335fd1efed7abf4a882))
+
+
+
+
+
 ## [0.2.1](https://github.com/oadpoaw/sloshdb/compare/v0.2.0...v0.2.1) (2021-04-17)
 
 **Note:** Version bump only for package undefined
