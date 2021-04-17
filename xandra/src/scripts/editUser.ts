@@ -71,16 +71,12 @@ dispatcher.authenticate().then(async () => {
                         ]).then(({ database }) => {
 
                             if (user.databases.includes(database)) {
-
                                 console.log('The user already has access to that database');
-
                             } else {
-
                                 User.update({ databases: user.databases.concat(database) }, { where: { username } })
                                     .then(() => {
                                         console.log(`'${username}' now has access to that database`);
                                     });
-
                             }
 
                         });
@@ -100,21 +96,17 @@ dispatcher.authenticate().then(async () => {
                                 choices: user.databases,
                             }
                         ]).then(({ database }) => {
-
                             User.update({ databases: user.databases.filter((db) => db !== database)}, { where: { username }})
                                 .then(() => {
                                     console.log(`'${username}' has no longer have access to '${database}'`);
-                                })
-
+                                });
                         });
 
                         break;
                     }
 
                     case 'list': {
-
                         console.log(user.databases);
-
                         break;
                     }
                 }

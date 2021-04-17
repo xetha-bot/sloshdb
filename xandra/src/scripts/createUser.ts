@@ -26,10 +26,6 @@ prompt([
         username,
         password,
         admin,
-    }).then(() => {
-
-        console.log(`${username}:${password}`);
-
-    });
+    }).then(() => console.log(`${username}:${password}`));
 
 }).catch(console.error);

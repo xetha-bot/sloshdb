@@ -35,7 +35,7 @@ Data.init({
     tableName: 'data',
 });
 
-sequelize.sync({ force: true }).catch((err) => {
+sequelize.sync().catch((err) => {
     Logger.error(err);
     process.exit(1);
 });
@@ -66,29 +66,21 @@ serverSocket.use(async (socket, next) => {
             validator.isBase64(handshake.headers.password as string) ? Base64.decode(handshake.headers.password as string) : '';
 
     if (!username) {
-
         return next(new Error('Auth Error: No username Header or it\'s invalid'));
-
     }
 
     if (!password) {
-
         return next(new Error('Auth Error: No password Header or it\'s invalid'));
-
     }
 
     const user = await User.findOne({ where: { username } });
 
     if (!user || hash(password) !== user.password) {
-
         return next(new Error('Auth Error: Invalid Credentials'));
-
     }
 
     if (!user.admin && !user.databases.includes(socket.nsp.name)) {
-
         return next(new Error('Auth Error: You cannot access that database'));
-
     }
 
     Logger.info(`[${socket.id}|${socket.handshake.address}|${user.username}|${socket.nsp.name}] authenticated`);
@@ -109,9 +101,7 @@ serverSocket.on('connection', (socket: Socket) => {
         socket.on(`$${method}`, async (req, done) => {
 
             if (!(typeof req !== 'object' || typeof done !== 'function')) {
-
                 return socket.emit('error', new Error(`Invalid Payload`));
-
             }
 
             Logger.info(`[${socket.id}|${socket.handshake.address}|${socket.nsp.name}] ${method.toUpperCase()} ${req.collection} ${req.key || ''}`);
@@ -136,9 +126,7 @@ serverSocket.on('connection', (socket: Socket) => {
                 });
 
             } catch (err) {
-
                 done(err);
-
             }
         });
     };

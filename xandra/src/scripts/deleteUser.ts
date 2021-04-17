@@ -30,15 +30,11 @@ dispatcher.authenticate().then(async () => {
             const { confirmation } = value as { confirmation: string; };
 
             if (confirmation) {
-
                 User.destroy({ where: { username } }).then(() => {
                     console.log(`User '${username}' has been deleted.`);
                 });
-
             } else {
-
                 console.log('I guess not.');
-
             }
         });
     });
