@@ -49,4 +49,4 @@ npm start
 
 ## Updating
 
-See [Updating](Updating)
+See [Updating](Updating.md)
