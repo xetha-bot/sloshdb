@@ -1,7 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "slosdb.js",
+    "sloshdb.js",
     "xandra"
   ],
   "directories": {
