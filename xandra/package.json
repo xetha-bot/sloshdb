@@ -5,7 +5,7 @@
     "scripts": {
         "start": "node . --trace-warnings",
         "clean": "rimraf dist",
-        "postbuild": "npm run clean",
+        "prebuild": "npm run clean",
         "build": "tsc --build",
         "test": "echo \"xandra testing, todo...\"",
         "update": "node dist/scripts/update.ts",

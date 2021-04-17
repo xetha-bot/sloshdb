@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rimraf dist",
-    "postbuild": "npm run clean",
+    "prebuild": "npm run clean",
     "build": "tsc --build",
     "test": "echo \"sloshdb.js testing, todo...\""
   },
