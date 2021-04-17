@@ -24,7 +24,7 @@ const execute = promisify(exec);
 
     await execute(`curl -Lo ${Config.filename} https://github.com/${Config.owner}/${Config.repository}/releases/latest/download/${Config.filename}`);
     const res = await fetch(`https://github.com/${Config.owner}/${Config.repository}/releases/latest/download/checksum.txt`);
-    const stdout = await res.json();
+    const stdout = await res.text();
 
     const checksum = sha256File(archive);
     const shasum = stdout.split(' ')[0];
