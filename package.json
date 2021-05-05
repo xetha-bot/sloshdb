@@ -8,7 +8,7 @@
     "doc": "docs"
   },
   "scripts": {
-    "bump": "lerna version --conventional-commits --yes",
+    "bump": "lerna version --conventional-commits --yes -m \"chore(release): publish %v\"",
     "diff": "lerna diff"
   },
   "devDependencies": {
