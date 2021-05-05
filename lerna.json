@@ -1,6 +1,5 @@
 {
   "packages": [
-    "sloshdb.js",
     "xandra"
   ],
   "version": "independent"

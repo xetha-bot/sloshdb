@@ -6,7 +6,6 @@ Real-time in-memory key-value database written in Typescript
 | Codebase                 |  Description  |
 | :----------------------- | :-----------: |
 | [xandra](xandra)         |    server     |
-| [sloshdb.js](sloshdb.js) |    client     |
 | [docs](docs)             | documentation |
 
 ## Features
