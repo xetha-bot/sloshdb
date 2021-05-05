@@ -33,7 +33,7 @@ const execute = promisify(exec);
         throw new Error(`SHA256 Checksum failed. Expected to be '${shasum}' but gotten '${checksum}'`);
     }
 
-    await execute(`tar -xzvf ${Config.filename}`);
+    await execute(`tar -xzf ${Config.filename}`);
     await fs.unlink(archive);
 
     await execute(`npm install --production`);
