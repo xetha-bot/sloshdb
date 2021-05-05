@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/oadpoaw/sloshdb/compare/v0.4.1...v0.5.0) (2021-05-05)
+
+
+### Features
+
+* **auth:** messages ([74269e6](https://github.com/oadpoaw/sloshdb/commit/74269e61abb30036462c40384bfb3be004c2bdf1))
+
+
+
+
+
 ## [0.4.1](https://github.com/oadpoaw/sloshdb/compare/v0.3.2...v0.4.1) (2021-05-05)
 
 
