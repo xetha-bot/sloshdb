@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/oadpoaw/sloshdb/compare/v0.3.2...v0.4.1) (2021-05-05)
+
+
+### Bug Fixes
+
+* **ci:** remove workflow labeler ([7fd2491](https://github.com/oadpoaw/sloshdb/commit/7fd2491754b990e5356a0c1409fb75fbb7a353bd))
+* **sloshdb.js:** package removal ([53b8a56](https://github.com/oadpoaw/sloshdb/commit/53b8a561e96760db49965b0cdbcad5ed55039ccd))
+
+
+### Features
+
+* **lerna:** !independent ([ecdf01a](https://github.com/oadpoaw/sloshdb/commit/ecdf01af1442269868adabea6735b2b3d0a26cc2))
+* **lerna:** commit message format ([c09fd81](https://github.com/oadpoaw/sloshdb/commit/c09fd817179526acb35e64b6264856fafa35369c))
+* **package:** name ([cbe22d9](https://github.com/oadpoaw/sloshdb/commit/cbe22d93414970fa9f37efbb489a6c42fd66bee7))
+
+
+### Performance Improvements
+
+* **exec:** remove `-v` flag, no verbosing ([cdc1803](https://github.com/oadpoaw/sloshdb/commit/cdc1803f8acecb9b0116c782fcab36a2292d3ae4))
+
+
+
+
+
 ## [0.3.2](https://github.com/oadpoaw/sloshdb/compare/v0.3.1...v0.3.2) (2021-04-17)
 
 

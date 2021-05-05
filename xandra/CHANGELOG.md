@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/oadpoaw/sloshdb/compare/v0.3.2...v0.4.1) (2021-05-05)
+
+
+### Features
+
+* **package:** name ([cbe22d9](https://github.com/oadpoaw/sloshdb/commit/cbe22d93414970fa9f37efbb489a6c42fd66bee7))
+
+
+### Performance Improvements
+
+* **exec:** remove `-v` flag, no verbosing ([cdc1803](https://github.com/oadpoaw/sloshdb/commit/cdc1803f8acecb9b0116c782fcab36a2292d3ae4))
+
+
+
+
+
 # 0.4.0 (2021-05-05)
 
 
