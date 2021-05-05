@@ -1,6 +1,6 @@
 {
     "private": true,
-    "version": "0.3.2",
+    "version": "0.3.3",
     "main": "dist/src/index.js",
     "scripts": {
         "start": "node . --trace-warnings",
