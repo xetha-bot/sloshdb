@@ -35,7 +35,7 @@ dispatcher.authenticate().then(async () => {
                     default: false,
                 },
             ]).then((value) => {
-                const { admin } = value as { admin: boolean; };
+                const { admin } = value as { admin: boolean };
 
                 User.update({ admin }, { where: { username } }).then(() => {
                     console.log(admin);
