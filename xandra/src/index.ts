@@ -43,7 +43,6 @@ sequelize.sync().catch((err) => {
 interface Middleware {
     (
         req: {
-            eventID: string;
             method: string;
             collection: string;
             key: string;
@@ -99,9 +98,9 @@ serverSocket.on('connection', (socket: Socket) => {
     });
 
     function use(method: string, fn: Middleware) {
-        socket.on(`$${method}`, async (req) => {
+        socket.on(`$${method}`, async (req, done) => {
 
-            if (typeof req !== 'object') {
+            if (typeof req !== 'object' || typeof done !== 'function') {
                 return socket.emit('error', new Error(`Invalid Payload`));
             }
 
@@ -113,7 +112,7 @@ serverSocket.on('connection', (socket: Socket) => {
 
                 fn(req, (data) => {
 
-                    database.emit(`$$${req.eventID}`, data);
+                    done(null, data);
 
                     if (['get', 'set', 'delete'].includes(req.method)) {
                         database.emit(`data`, {
@@ -127,7 +126,7 @@ serverSocket.on('connection', (socket: Socket) => {
                 });
 
             } catch (err) {
-                database.emit(`$$error-${req.eventID}`);
+                done(err);
             }
         });
     };
