@@ -39,7 +39,7 @@ const execute = promisify(exec);
         `curl -Lo ${Config.filename} https://github.com/${Config.owner}/${Config.repository}/releases/latest/download/${Config.filename}`,
     );
 
-    download.done('Download Completed.');
+    download.done({ message: 'Download Completed.' });
 
     Logger.info('Fetching Checksums...');
     const res = await fetch(
@@ -66,7 +66,7 @@ const execute = promisify(exec);
     await fs.unlink(archive);
     await execute(`npm install --production`);
 
-    install.done('Installation Completed.');
+    install.done({ message: 'Installation Completed.' });
 
     process.exit();
 })().catch((err) => {
