@@ -56,6 +56,11 @@ interface Middleware {
 
 const server = serverSocket.of(/^\/\w+$/);
 
+serverSocket.on('connection', (socket) => {
+    socket.emit('error', new Error('Database Root Connection Not Allowed.'));
+    socket.disconnect(true);
+});
+
 server.use(async (socket, next) => {
     Logger.info(
         `[${socket.id}|${socket.handshake.address.replace(
