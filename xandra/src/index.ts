@@ -1,9 +1,6 @@
 import { Server } from 'socket.io';
 import SocketHandler from './SocketHandler';
 import Logger from './utils/Logger';
-import processor from '@xetha/processor';
-
-processor(Logger);
 
 const serverSocket = new Server();
 
