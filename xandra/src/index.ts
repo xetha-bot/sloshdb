@@ -78,25 +78,29 @@ server.use(async (socket, next) => {
             : '';
 
     if (!username) {
-        return next(
-            new Error("Auth Error: No username Header or it's invalid"),
-        );
+        const err = new Error("Auth Error: No 'username' Header or it's invalid");
+        socket.emit('error', err);
+        return next(err);
     }
 
     if (!password) {
-        return next(
-            new Error("Auth Error: No password Header or it's invalid"),
-        );
+        const err = new Error("Auth Error: No 'password' Header or it's invalid");
+        socket.emit('error', err);
+        return next(err);
     }
 
     const user = await User.findOne({ where: { username } });
 
     if (!user || hash(password) !== user.password) {
-        return next(new Error('Auth Error: Invalid Credentials'));
+        const err = new Error('Auth Error: Invalid Credentials');
+        socket.emit('error', err);
+        return next(err);
     }
 
     if (!user.admin && !user.databases.includes(socket.nsp.name)) {
-        return next(new Error('Auth Error: Database Access Denied'));
+        const err = new Error('Auth Error: Database Access Denied')
+        socket.emit('error', err);
+        return next(err);
     }
 
     Logger.info(
@@ -110,6 +114,8 @@ server.use(async (socket, next) => {
 
 server.on('connection', (socket: Socket) => {
     const database = socket.nsp;
+
+    socket.emit('ready');
 
     socket.on('message', async (message) => {
         Logger.info(
