@@ -14,7 +14,7 @@ class Data extends Model {
     public database!: string;
     public collection!: string;
     public key!: string;
-    public data!: { value: any; };
+    public data!: { value: any };
 }
 
 Data.init(
@@ -62,24 +62,27 @@ function superLogger(user: string, socket: Socket, message: string) {
 }
 
 export default async function SocketHandler(socket: Socket) {
-
     superLogger(null, socket, 'authenticating...');
 
     const handshake = socket.request;
     const username =
         handshake.headers.username &&
-            validator.isBase64(handshake.headers.username as string)
+        validator.isBase64(handshake.headers.username as string)
             ? Base64.decode(handshake.headers.username as string)
             : '';
 
     const password =
         handshake.headers.password &&
-            validator.isBase64(handshake.headers.password as string)
+        validator.isBase64(handshake.headers.password as string)
             ? Base64.decode(handshake.headers.password as string)
             : '';
 
     const destroy = (err_msg: string) => {
-        superLogger(null, socket, `authentication failed: ${err_msg.replace(/Auth Error\: /g, '')}`);
+        superLogger(
+            null,
+            socket,
+            `authentication failed: ${err_msg.replace(/Auth Error\: /g, '')}`,
+        );
         socket.emit('error', err_msg);
         socket.disconnect(true);
     };
@@ -123,7 +126,11 @@ export default async function SocketHandler(socket: Socket) {
                 return socket.emit('error', new Error(`Invalid Payload`));
             }
 
-            superLogger(user.username, socket, `${method.toUpperCase()} ${req.collection} ${req.key ?? ''}`);
+            superLogger(
+                user.username,
+                socket,
+                `${method.toUpperCase()} ${req.collection} ${req.key ?? ''}`,
+            );
 
             try {
                 req.method = method;
@@ -220,5 +227,4 @@ export default async function SocketHandler(socket: Socket) {
         superLogger(user.username, socket, 'disconnected');
         socket.removeAllListeners();
     });
-
 }

@@ -16,7 +16,7 @@ serverSocket.on('connection', (socket) => {
 
 server.on('connection', SocketHandler);
 
-const PORT =  process.env.PORT ? Number.parseInt(process.env.PORT) : 5123;
+const PORT = process.env.PORT ? Number.parseInt(process.env.PORT) : 5123;
 
 serverSocket.listen(PORT);
 
