@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/oadpoaw/sloshdb/compare/v0.6.3...v0.7.0) (2021-05-06)
+
+
+### Features
+
+* **src:** prettier format and linting ([78ca4bf](https://github.com/oadpoaw/sloshdb/commit/78ca4bf16a93440173bd2cc12995a8099d47db03))
+
+
+
+
+
 ## [0.6.3](https://github.com/oadpoaw/sloshdb/compare/v0.6.2...v0.6.3) (2021-05-06)
 
 **Note:** Version bump only for package xandra
