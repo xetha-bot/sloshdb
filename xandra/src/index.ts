@@ -40,19 +40,23 @@ sequelize.sync().catch((err) => {
     process.exit(1);
 });
 
+interface RequestSocket {
+    method: string;
+    collection: string;
+    key: string;
+    data?: any;
+}
+
 interface Middleware {
     (
-        req: {
-            method: string;
-            collection: string;
-            key: string;
-            data?: any;
-        },
+        req: RequestSocket,
         done: <T>(data?: T) => void
     ): void;
 }
 
-serverSocket.use(async (socket, next) => {
+const server = serverSocket.of(/^\/\w+$/);
+
+server.use(async (socket, next) => {
 
     Logger.info(`[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}] authenticating...`);
 
@@ -89,7 +93,7 @@ serverSocket.use(async (socket, next) => {
 
 });
 
-serverSocket.on('connection', (socket: Socket) => {
+server.on('connection', (socket: Socket) => {
 
     const database = socket.nsp;
 
@@ -98,9 +102,12 @@ serverSocket.on('connection', (socket: Socket) => {
     });
 
     function use(method: string, fn: Middleware) {
-        socket.on(`$${method}`, async (req, done) => {
+        socket.on(`$${method}`, async (req: RequestSocket, done) => {
 
-            if (typeof req !== 'object' || typeof done !== 'function') {
+            if (typeof req !== 'object' ||
+                typeof req.collection !== 'string' ||
+                typeof req.key !== 'string' ||
+                typeof done !== 'function') {
                 return socket.emit('error', new Error(`Invalid Payload`));
             }
 
