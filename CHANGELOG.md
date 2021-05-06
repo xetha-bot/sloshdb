@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.5](https://github.com/oadpoaw/sloshdb/compare/v0.9.4...v0.9.5) (2021-05-06)
+
+
+### Bug Fixes
+
+* **updater:** time logging ([a15ffce](https://github.com/oadpoaw/sloshdb/commit/a15ffce6f7be013cfdf9dc9236d1ae59cad527d1))
+
+
+
+
+
 ## [0.9.4](https://github.com/oadpoaw/sloshdb/compare/v0.9.3...v0.9.4) (2021-05-06)
 
 
