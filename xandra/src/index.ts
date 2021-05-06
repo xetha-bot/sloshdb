@@ -8,32 +8,35 @@ import validator from 'validator';
 
 const serverSocket = new Server();
 
-const sequelize = new Sequelize('sqlite://data/data.sqlite', { logging: false });
+const sequelize = new Sequelize('sqlite://data/data.sqlite', {
+    logging: false,
+});
 
 class Data extends Model {
-
     public database!: string;
     public collection!: string;
     public key!: string;
-    public data!: { value: any; };
-
+    public data!: { value: any };
 }
 
-Data.init({
-    database: DataTypes.STRING,
-    collection: DataTypes.STRING,
-    key: DataTypes.STRING,
-    data: {
-        type: DataTypes.JSON,
-        allowNull: false,
-        defaultValue: {},
+Data.init(
+    {
+        database: DataTypes.STRING,
+        collection: DataTypes.STRING,
+        key: DataTypes.STRING,
+        data: {
+            type: DataTypes.JSON,
+            allowNull: false,
+            defaultValue: {},
+        },
     },
-}, {
-    sequelize,
-    freezeTableName: true,
-    modelName: 'data',
-    tableName: 'data',
-});
+    {
+        sequelize,
+        freezeTableName: true,
+        modelName: 'data',
+        tableName: 'data',
+    },
+);
 
 sequelize.sync().catch((err) => {
     Logger.error(err);
@@ -48,33 +51,42 @@ interface RequestSocket {
 }
 
 interface Middleware {
-    (
-        req: RequestSocket,
-        done: <T>(data?: T) => void
-    ): void;
+    (req: RequestSocket, done: <T>(data?: T) => void): void;
 }
 
 const server = serverSocket.of(/^\/\w+$/);
 
 server.use(async (socket, next) => {
-
-    Logger.info(`[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}] authenticating...`);
+    Logger.info(
+        `[${socket.id}|${socket.handshake.address.replace(
+            /\:\:ffff\:/g,
+            '',
+        )}] authenticating...`,
+    );
 
     const handshake = socket.request;
     const username =
         handshake.headers.username &&
-            validator.isBase64(handshake.headers.username as string) ? Base64.decode(handshake.headers.username as string) : '';
+        validator.isBase64(handshake.headers.username as string)
+            ? Base64.decode(handshake.headers.username as string)
+            : '';
 
     const password =
         handshake.headers.password &&
-            validator.isBase64(handshake.headers.password as string) ? Base64.decode(handshake.headers.password as string) : '';
+        validator.isBase64(handshake.headers.password as string)
+            ? Base64.decode(handshake.headers.password as string)
+            : '';
 
     if (!username) {
-        return next(new Error('Auth Error: No username Header or it\'s invalid'));
+        return next(
+            new Error("Auth Error: No username Header or it's invalid"),
+        );
     }
 
     if (!password) {
-        return next(new Error('Auth Error: No password Header or it\'s invalid'));
+        return next(
+            new Error("Auth Error: No password Header or it's invalid"),
+        );
     }
 
     const user = await User.findOne({ where: { username } });
@@ -87,38 +99,51 @@ server.use(async (socket, next) => {
         return next(new Error('Auth Error: Database Access Denied'));
     }
 
-    Logger.info(`[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}|${user.username}|${socket.nsp.name}] authenticated`);
+    Logger.info(
+        `[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}|${
+            user.username
+        }|${socket.nsp.name}] authenticated`,
+    );
 
     next();
-
 });
 
 server.on('connection', (socket: Socket) => {
-
     const database = socket.nsp;
 
     socket.on('message', async (message) => {
-        Logger.info(`[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}|${socket.nsp.name}] ${message}`);
+        Logger.info(
+            `[${socket.id}|${socket.handshake.address.replace(
+                /\:\:ffff\:/g,
+                '',
+            )}|${socket.nsp.name}] ${message}`,
+        );
     });
 
     function use(method: string, fn: Middleware) {
         socket.on(`$${method}`, async (req: RequestSocket, done) => {
-
-            if (typeof req !== 'object' ||
+            if (
+                typeof req !== 'object' ||
                 typeof req.collection !== 'string' ||
                 typeof req.key !== 'string' ||
-                typeof done !== 'function') {
+                typeof done !== 'function'
+            ) {
                 return socket.emit('error', new Error(`Invalid Payload`));
             }
 
-            Logger.info(`[${socket.id}|${socket.handshake.address.replace(/\:\:ffff\:/g, '')}|${socket.nsp.name}] ${method.toUpperCase()} ${req.collection} ${req.key || ''}`);
+            Logger.info(
+                `[${socket.id}|${socket.handshake.address.replace(
+                    /\:\:ffff\:/g,
+                    '',
+                )}|${socket.nsp.name}] ${method.toUpperCase()} ${
+                    req.collection
+                } ${req.key || ''}`,
+            );
 
             try {
-
                 req.method = method;
 
                 fn(req, (data) => {
-
                     done(null, data);
 
                     if (['get', 'set', 'delete'].includes(req.method)) {
@@ -129,21 +154,19 @@ server.on('connection', (socket: Socket) => {
                             data: data,
                         });
                     }
-
                 });
-
             } catch (err) {
                 done(err);
             }
         });
-    };
+    }
 
     use('get', (req, done) => {
         Data.findOne({
             where: {
                 database: database.name,
                 collection: req.collection,
-                key: req.key
+                key: req.key,
             },
         }).then((out) => done(out ? out.data.value : undefined));
     });
@@ -157,16 +180,18 @@ server.on('connection', (socket: Socket) => {
             },
         }).then((data) => {
             if (data) {
-
                 data.data.value = req.data;
 
-                Data.update({ data: data.data }, {
-                    where: {
-                        database: database.name,
-                        collection: req.collection,
-                        key: req.key,
+                Data.update(
+                    { data: data.data },
+                    {
+                        where: {
+                            database: database.name,
+                            collection: req.collection,
+                            key: req.key,
+                        },
                     },
-                }).then(() => done(req.data));
+                ).then(() => done(req.data));
             } else {
                 Data.create({
                     database: database.name,
@@ -210,7 +235,8 @@ server.on('connection', (socket: Socket) => {
         Logger.info(`[${socket.id}] disconnected`);
         socket.removeAllListeners();
     });
-
 });
 
-serverSocket.listen(process.env.PORT ? Number.parseInt(process.env.PORT) : 5123);
+serverSocket.listen(
+    process.env.PORT ? Number.parseInt(process.env.PORT) : 5123,
+);

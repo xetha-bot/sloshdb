@@ -20,6 +20,7 @@ jobs:
       - working-directory: xandra
         run: |
           npm ci
+          npm run lint
           npm run build
           npm test
           tar -cvzf xandra.tar.gz package.json package-lock.json dist data LICENSE

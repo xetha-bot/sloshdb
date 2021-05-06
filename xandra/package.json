@@ -10,6 +10,8 @@
         "build": "tsc --build",
         "test": "echo \"xandra testing, todo...\"",
         "update": "node dist/src/scripts/update.js",
+        "format": "prettier --write \"src/**/*.{js,ts}\"",
+        "lint": "prettier --check \"src/**/*.{js,ts}\"",
         "u:create": "node dist/src/scripts/createUser.js",
         "u:delete": "node dist/src/scripts/deleteUser.js",
         "u:edit": "node dist/src/scripts/editUser.js",
@@ -39,6 +41,7 @@
         "@types/sha256-file": "^1.0.0",
         "@types/socket.io": "^2.1.13",
         "@types/validator": "^13.1.3",
+        "prettier": "^2.2.1",
         "rimraf": "^3.0.2",
         "typescript": "^4.2.3"
     }
