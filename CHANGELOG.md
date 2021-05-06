@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.2](https://github.com/oadpoaw/sloshdb/compare/v0.6.1...v0.6.2) (2021-05-06)
+
+
+### Bug Fixes
+
+* Use `done` function instead of eventIDs ([71b8185](https://github.com/oadpoaw/sloshdb/commit/71b818527f2723035c8a997e913bcd3dabfdd482))
+
+
+
+
+
 ## [0.6.1](https://github.com/oadpoaw/sloshdb/compare/v0.6.0...v0.6.1) (2021-05-06)
 
 
