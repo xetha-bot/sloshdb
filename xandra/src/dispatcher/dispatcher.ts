@@ -41,7 +41,7 @@ User.init(
         databases: {
             type: DataTypes.JSON,
             allowNull: false,
-            defaultValue: ['/'],
+            defaultValue: [],
         },
     },
     {
