@@ -33,13 +33,13 @@ const execute = promisify(exec);
     const archive = path.join(path.resolve(process.cwd()), Config.filename);
 
     Logger.info('Downloading Update...');
-    const download = Logger.startTimer();
+    Logger.profile('download');
 
     await execute(
         `curl -Lo ${Config.filename} https://github.com/${Config.owner}/${Config.repository}/releases/latest/download/${Config.filename}`,
     );
 
-    download.done({ message: 'Download Completed.' });
+    Logger.profile('download');
 
     Logger.info('Fetching Checksums...');
     const res = await fetch(
@@ -60,13 +60,13 @@ const execute = promisify(exec);
     Logger.info(`Checksums Matched!`);
 
     Logger.info('Installing Update...');
-    const install = Logger.startTimer();
+    Logger.profile('install');
 
     await execute(`tar -xzf ${Config.filename}`);
     await fs.unlink(archive);
     await execute(`npm install --production`);
 
-    install.done({ message: 'Installation Completed.' });
+    Logger.profile('install');
 
     process.exit();
 })().catch((err) => {
