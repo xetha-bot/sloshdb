@@ -11,7 +11,6 @@ import Logger from '../utils/Logger';
 const execute = promisify(exec);
 
 (async function () {
-
     Logger.info(`Checking for Updates...`);
 
     const response = await fetch(
@@ -29,7 +28,7 @@ const execute = promisify(exec);
     Logger.info('Deleting old files...');
     await fs
         .unlink(path.join(path.resolve(process.cwd()), 'dist'))
-        .catch(() => { });
+        .catch(() => {});
 
     const archive = path.join(path.resolve(process.cwd()), Config.filename);
 
