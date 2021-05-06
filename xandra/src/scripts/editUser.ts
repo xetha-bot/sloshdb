@@ -35,7 +35,7 @@ dispatcher.authenticate().then(async () => {
                     default: false,
                 },
             ]).then((value) => {
-                const { admin } = value as { admin: boolean };
+                const { admin } = value as { admin: boolean; };
 
                 User.update({ admin }, { where: { username } }).then(() => {
                     console.log(admin);
@@ -65,6 +65,7 @@ dispatcher.authenticate().then(async () => {
                                 name: 'database',
                             },
                         ]).then(({ database }) => {
+                            database = `/${database.replace(/\//g, '')}`;
                             if (user.databases.includes(database)) {
                                 console.log(
                                     'The user already has access to that database',

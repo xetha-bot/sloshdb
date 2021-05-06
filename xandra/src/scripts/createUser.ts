@@ -20,7 +20,7 @@ prompt([
             username: string;
             admin: boolean;
         };
-        const password = Random.string(16);
+        const password = Random.string(32);
 
         const exist = await User.findOne({ where: { username } });
         if (exist)
