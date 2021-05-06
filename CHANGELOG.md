@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/oadpoaw/sloshdb/compare/v0.8.0...v0.8.1) (2021-05-06)
+
+
+### Bug Fixes
+
+* more accurate error messages when emitting ([249c5c6](https://github.com/oadpoaw/sloshdb/commit/249c5c6efb2435bcd389f9fb22d671e4bc6228f0))
+
+
+
+
+
 # [0.8.0](https://github.com/oadpoaw/sloshdb/compare/v0.7.2...v0.8.0) (2021-05-06)
 
 
