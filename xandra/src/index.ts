@@ -57,7 +57,7 @@ interface Middleware {
 const server = serverSocket.of(/^\/\w+$/);
 
 serverSocket.on('connection', (socket) => {
-    socket.emit('error', new Error('Database Root Connection Not Allowed.'));
+    socket.emit('error', 'Database Root Connection Not Allowed.');
     socket.disconnect(true);
 });
 
@@ -86,7 +86,7 @@ server.use(async (socket, next) => {
         const err = new Error(
             "Auth Error: No 'username' Header or it's invalid",
         );
-        socket.emit('error', err);
+        socket.emit('error', err.message);
         return next(err);
     }
 
@@ -94,7 +94,7 @@ server.use(async (socket, next) => {
         const err = new Error(
             "Auth Error: No 'password' Header or it's invalid",
         );
-        socket.emit('error', err);
+        socket.emit('error', err.message);
         return next(err);
     }
 
@@ -102,13 +102,13 @@ server.use(async (socket, next) => {
 
     if (!user || hash(password) !== user.password) {
         const err = new Error('Auth Error: Invalid Credentials');
-        socket.emit('error', err);
+        socket.emit('error', err.message);
         return next(err);
     }
 
     if (!user.admin && !user.databases.includes(socket.nsp.name)) {
         const err = new Error('Auth Error: Database Access Denied');
-        socket.emit('error', err);
+        socket.emit('error', err.message);
         return next(err);
     }
 
@@ -171,7 +171,7 @@ server.on('connection', (socket: Socket) => {
                     }
                 });
             } catch (err) {
-                done(err);
+                done(err.message);
             }
         });
     }
