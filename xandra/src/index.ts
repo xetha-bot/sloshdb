@@ -78,13 +78,17 @@ server.use(async (socket, next) => {
             : '';
 
     if (!username) {
-        const err = new Error("Auth Error: No 'username' Header or it's invalid");
+        const err = new Error(
+            "Auth Error: No 'username' Header or it's invalid",
+        );
         socket.emit('error', err);
         return next(err);
     }
 
     if (!password) {
-        const err = new Error("Auth Error: No 'password' Header or it's invalid");
+        const err = new Error(
+            "Auth Error: No 'password' Header or it's invalid",
+        );
         socket.emit('error', err);
         return next(err);
     }
@@ -98,7 +102,7 @@ server.use(async (socket, next) => {
     }
 
     if (!user.admin && !user.databases.includes(socket.nsp.name)) {
-        const err = new Error('Auth Error: Database Access Denied')
+        const err = new Error('Auth Error: Database Access Denied');
         socket.emit('error', err);
         return next(err);
     }
