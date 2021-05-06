@@ -1,6 +1,9 @@
 import { Server } from 'socket.io';
-import authenticator from './authenticator';
 import SocketHandler from './SocketHandler';
+import Logger from './utils/Logger';
+import processor from '@xetha/processor';
+
+processor(Logger);
 
 const serverSocket = new Server();
 
@@ -11,9 +14,10 @@ serverSocket.on('connection', (socket) => {
     socket.disconnect(true);
 });
 
-server.use(authenticator);
 server.on('connection', SocketHandler);
 
-serverSocket.listen(
-    process.env.PORT ? Number.parseInt(process.env.PORT) : 5123,
-);
+const PORT =  process.env.PORT ? Number.parseInt(process.env.PORT) : 5123;
+
+serverSocket.listen(PORT);
+
+Logger.info(`Database running on PORT ${PORT}`);

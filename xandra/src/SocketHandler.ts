@@ -1,7 +1,10 @@
 import { Socket } from 'socket.io';
-import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { Sequelize, DataTypes, Model } from 'sequelize';
 import Logger from './utils/Logger';
+import Base64 from '@xetha/base64';
+import { User } from './dispatcher/dispatcher';
+import hash from './dispatcher/hash';
+import validator from 'validator';
 
 const sequelize = new Sequelize('sqlite://data/data.sqlite', {
     logging: false,
@@ -49,19 +52,65 @@ interface Middleware {
     (req: RequestSocket, done: <T>(data?: T) => void): void;
 }
 
-export default async function SocketHandler(socket: Socket<DefaultEventsMap, DefaultEventsMap>) {
+function superLogger(user: string, socket: Socket, message: string) {
+    Logger.info(
+        `[${user ? user : socket.id}|${socket.handshake.address.replace(
+            /\:\:ffff\:/g,
+            '',
+        )}|${socket.nsp.name}] ${message}`,
+    );
+}
+
+export default async function SocketHandler(socket: Socket) {
+
+    superLogger(null, socket, 'authenticating...');
+
+    const handshake = socket.request;
+    const username =
+        handshake.headers.username &&
+            validator.isBase64(handshake.headers.username as string)
+            ? Base64.decode(handshake.headers.username as string)
+            : '';
+
+    const password =
+        handshake.headers.password &&
+            validator.isBase64(handshake.headers.password as string)
+            ? Base64.decode(handshake.headers.password as string)
+            : '';
+
+    const destroy = (err_msg: string) => {
+        superLogger(null, socket, `authentication failed: ${err_msg.replace(/Auth Error\: /g, '')}`);
+        const err = new Error(err_msg);
+        socket.emit('error', err.message);
+        socket.disconnect(true);
+    };
+
+    if (!username) {
+        return destroy("Auth Error: No 'username' Header or it's invalid");
+    }
+
+    if (!password) {
+        return destroy("Auth Error: No 'password' Header or it's invalid");
+    }
+
+    const user = await User.findOne({ where: { username } });
+
+    if (!user || hash(password) !== user.password) {
+        return destroy('Auth Error: Invalid Credentials');
+    }
+
+    if (!user.admin && !user.databases.includes(socket.nsp.name)) {
+        return destroy('Auth Error: Database Access Denied');
+    }
+
+    superLogger(user.username, socket, 'authenticated');
 
     const database = socket.nsp;
 
     socket.emit('ready');
 
     socket.on('message', async (message) => {
-        Logger.info(
-            `[${socket.id}|${socket.handshake.address.replace(
-                /\:\:ffff\:/g,
-                '',
-            )}|${socket.nsp.name}] ${message}`,
-        );
+        superLogger(user.username, socket, message);
     });
 
     function use(method: string, fn: Middleware) {
@@ -75,13 +124,7 @@ export default async function SocketHandler(socket: Socket<DefaultEventsMap, Def
                 return socket.emit('error', new Error(`Invalid Payload`));
             }
 
-            Logger.info(
-                `[${socket.id}|${socket.handshake.address.replace(
-                    /\:\:ffff\:/g,
-                    '',
-                )}|${socket.nsp.name}] ${method.toUpperCase()} ${req.collection
-                } ${req.key || ''}`,
-            );
+            superLogger(user.username, socket, `${method.toUpperCase()} ${req.collection} ${req.key ?? ''}`);
 
             try {
                 req.method = method;
@@ -175,7 +218,7 @@ export default async function SocketHandler(socket: Socket<DefaultEventsMap, Def
     });
 
     socket.on('disconnect', () => {
-        Logger.info(`[${socket.id}] disconnected`);
+        superLogger(user.username, socket, 'disconnected');
         socket.removeAllListeners();
     });
 
