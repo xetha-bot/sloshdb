@@ -80,8 +80,7 @@ export default async function SocketHandler(socket: Socket) {
 
     const destroy = (err_msg: string) => {
         superLogger(null, socket, `authentication failed: ${err_msg.replace(/Auth Error\: /g, '')}`);
-        const err = new Error(err_msg);
-        socket.emit('error', err.message);
+        socket.emit('error', err_msg);
         socket.disconnect(true);
     };
 
