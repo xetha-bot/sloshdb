@@ -116,7 +116,7 @@ serverSocket.on('connection', (socket: Socket) => {
                     database.emit(`$$${req.eventID}`, data);
 
                     if (['get', 'set', 'delete'].includes(req.method)) {
-                        database.emit(`$sync`, {
+                        database.emit(`data`, {
                             method: req.method,
                             collection: req.collection,
                             key: req.key,
