@@ -41,7 +41,7 @@
         "@types/sha256-file": "^1.0.0",
         "@types/socket.io": "^2.1.13",
         "@types/validator": "^13.1.3",
-        "prettier": "^2.2.1",
+        "prettier": "^2.3.0",
         "rimraf": "^3.0.2",
         "typescript": "^4.2.3"
     }
