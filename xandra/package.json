@@ -35,7 +35,7 @@
     "devDependencies": {
         "@types/crypto-js": "^4.0.1",
         "@types/inquirer": "^7.3.1",
-        "@types/node": "^15.0.2",
+        "@types/node": "^15.12.5",
         "@types/node-fetch": "^2.5.10",
         "@types/sequelize": "^4.28.9",
         "@types/sha256-file": "^1.0.0",
