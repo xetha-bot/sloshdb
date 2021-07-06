@@ -33,7 +33,7 @@
         "validator": "^13.6.0"
     },
     "devDependencies": {
-        "@types/crypto-js": "^4.0.1",
+        "@types/crypto-js": "^4.0.2",
         "@types/inquirer": "^7.3.1",
         "@types/node": "^15.0.2",
         "@types/node-fetch": "^2.5.10",
