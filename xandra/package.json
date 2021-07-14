@@ -24,7 +24,7 @@
         "@xetha/random": "^1.0.6",
         "crypto-js": "^4.0.0",
         "dotenv": "^9.0.0",
-        "inquirer": "^8.0.0",
+        "inquirer": "^8.1.2",
         "node-fetch": "^2.6.1",
         "sequelize": "^6.5.0",
         "sha256-file": "^1.0.0",
